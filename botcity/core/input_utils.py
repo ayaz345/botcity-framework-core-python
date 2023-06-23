@@ -47,17 +47,15 @@ keys_map = {
 }
 
 if platform.system() != "Darwin":
-    keys_map.update(
-        {
-            "numlock": Key.num_lock,
-            "prtsc":  Key.print_screen,
-            "prtscr": Key.print_screen,
-            "printscreen": Key.print_screen,
-            "prntscrn": Key.print_screen,
-            "print": Key.print_screen,
-            "scrolllock": Key.scroll_lock,
-        }
-    )
+    keys_map |= {
+        "numlock": Key.num_lock,
+        "prtsc": Key.print_screen,
+        "prtscr": Key.print_screen,
+        "printscreen": Key.print_screen,
+        "prntscrn": Key.print_screen,
+        "print": Key.print_screen,
+        "scrolllock": Key.scroll_lock,
+    }
 
 mouse_map = {
     "left": Button.left,
@@ -81,6 +79,6 @@ def _mouse_click(mouse_controller: Controller, x: int, y: int, clicks=1, interva
 
         mouse_controller.position = (x, y)
         time.sleep(0.1)
-        for i in range(clicks):
+        for _ in range(clicks):
             mouse_controller.click(button=mouse_button, count=1)
             time.sleep(interval_between_clicks / 1000.0)
